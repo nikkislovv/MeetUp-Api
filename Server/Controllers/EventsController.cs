@@ -33,5 +33,7 @@ namespace Server.Controllers
             var eventsDto = _mapper.Map<IEnumerable<EventToShowDto>>(events);
             return Ok(eventsDto);
         }
+
+
     }
 }

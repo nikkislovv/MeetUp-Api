@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using NLog;
+using Server.ActionFilters;
 using Server.Extensions;
 using System;
 using System.Collections.Generic;
@@ -37,7 +38,7 @@ namespace Server
             services.ConfigureSqlContext(Configuration);
             services.ConfigureRepositoryManager();
             services.AddAutoMapper(typeof(Startup));
-
+            services.AddScoped<ValidationFilterAttribute>();
 
             services.AddControllers();
        

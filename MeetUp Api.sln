@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{12A8E58D-6987-4631-BD63-DD8E65F19E3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "Server\Server.csproj", "{12A8E58D-6987-4631-BD63-DD8E65F19E3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Contracts.csproj", "{DB68A364-335C-4D7E-8FB0-3B336535A0B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "Contracts\Contracts.csproj", "{DB68A364-335C-4D7E-8FB0-3B336535A0B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerService", "LoggerService\LoggerService.csproj", "{41AC39FE-B0A2-4355-B100-C76937BBA83F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoggerService", "LoggerService\LoggerService.csproj", "{41AC39FE-B0A2-4355-B100-C76937BBA83F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{27814A81-013E-4EB1-BFB8-DD35A44A9BB3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{41AC39FE-B0A2-4355-B100-C76937BBA83F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{41AC39FE-B0A2-4355-B100-C76937BBA83F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{41AC39FE-B0A2-4355-B100-C76937BBA83F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27814A81-013E-4EB1-BFB8-DD35A44A9BB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27814A81-013E-4EB1-BFB8-DD35A44A9BB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27814A81-013E-4EB1-BFB8-DD35A44A9BB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27814A81-013E-4EB1-BFB8-DD35A44A9BB3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

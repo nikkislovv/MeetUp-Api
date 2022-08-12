@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Repository;
 
 namespace Server.Extensions
 {
@@ -29,6 +30,10 @@ namespace Server.Extensions
                 b.MigrationsAssembly("Server")));
         }
 
+        public static void ConfigureRepositoryManager(this IServiceCollection services)
+        {
+             services.AddScoped<IRepositoryManager, RepositoryManager>();
+        }
     }
 
 }

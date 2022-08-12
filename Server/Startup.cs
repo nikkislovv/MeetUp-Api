@@ -33,6 +33,7 @@ namespace Server
         {
             services.ConfigureIISIntegration();
             services.ConfigureLoggerService();
+            services.ConfigureSqlContext(Configuration);
 
             services.AddControllers();
        

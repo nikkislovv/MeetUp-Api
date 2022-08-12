@@ -29,18 +29,9 @@ namespace Server.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllEventsAsync()
         {
-            try
-            {
-                var events = await _repository.Event.GetAllEventsAsync(false);
-                var eventsDto = _mapper.Map<IEnumerable<EventToShowDto>>(events);
-                return Ok(eventsDto);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Something went wrong in the {nameof(GetAllEventsAsync)} action {ex}");
-                return StatusCode(500, "Internal server error");
-            }
-
+            var events = await _repository.Event.GetAllEventsAsync(false);
+            var eventsDto = _mapper.Map<IEnumerable<EventToShowDto>>(events);
+            return Ok(eventsDto);
         }
     }
 }

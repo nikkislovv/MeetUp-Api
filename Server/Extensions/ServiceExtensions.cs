@@ -2,12 +2,15 @@
 using Entities;
 using Entities.Models;
 using LoggerService;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Repository;
+using Server.Auth;
 
 namespace Server.Extensions
 {
@@ -50,6 +53,33 @@ namespace Server.Extensions
             });
             builder = new IdentityBuilder(builder.UserType, typeof(IdentityRole),builder.Services);
             builder.AddEntityFrameworkStores<RepositoryContext>().AddDefaultTokenProviders();
+        }
+
+        public static void ConfigureJWT(this IServiceCollection services)
+        {
+
+            services.AddAuthentication(opt =>
+            {
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+
+                   .AddJwtBearer(options =>
+                   {
+
+                       options.RequireHttpsMetadata = false;
+                       options.TokenValidationParameters = new TokenValidationParameters
+                       {
+
+                           ValidateIssuer = true,
+                           ValidIssuer = AuthOptions.ISSUER,
+                           ValidateAudience = true,
+                           ValidAudience = AuthOptions.AUDIENCE,
+                           ValidateLifetime = true,
+                           IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
+                           ValidateIssuerSigningKey = true,
+                       };
+                   });
         }
     }
 

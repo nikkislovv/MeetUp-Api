@@ -17,14 +17,16 @@ namespace Server.Controllers
         private readonly ILoggerManager _logger;
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
-        public AccountController(ILoggerManager logger, IMapper mapper,UserManager<User> userManager)
+        private readonly IAuthenticationManager _authManager;
+        public AccountController(ILoggerManager logger, IMapper mapper,UserManager<User> userManager, IAuthenticationManager authManager)
         {
             _logger = logger;
             _mapper = mapper;
             _userManager = userManager;
+            _authManager = authManager;
         }
 
-        [HttpPost("register")]
+        [HttpPost("Register")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> RegisterUser([FromBody] UserForRegistrationDto userForRegistration)
         {
@@ -40,6 +42,23 @@ namespace Server.Controllers
             }
             await _userManager.AddToRolesAsync(user, userForRegistration.Roles);
             return StatusCode(201);
+        }
+
+        [HttpPost("SignIn")]
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
+        public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto userDto)
+        {
+            if (!await _authManager.ValidateUser(userDto))
+            {
+                _logger.LogWarn($"{nameof(Authenticate)}: Authentication failed. Wrong user name or password.");
+                return Unauthorized();
+            }
+            var result = new
+            {
+                UserName = userDto.UserName,
+                Token = await _authManager.CreateToken()
+            };
+            return Ok(result);
         }
     }
 }

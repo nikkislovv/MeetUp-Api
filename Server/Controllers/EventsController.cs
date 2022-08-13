@@ -73,6 +73,20 @@ namespace Server.Controllers
             return NoContent();
         }
 
+        [HttpDelete("{Id}")]
+        public async Task<IActionResult> DeleteEventAsync([FromRoute] Guid Id)
+        {
+            var _event = await _repository.Event.GetEventByIdAsync(Id, false);
+            if (_event==null)
+            {
+                _logger.LogInfo($"Event with id: {Id} doesn't exist in the database.");
+                return NotFound();
+            }
+            _repository.Event.DeleteEvent(_event);
+            await _repository.SaveAsync();
+            return NoContent();
+        }
+
 
 
     }

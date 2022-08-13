@@ -4,6 +4,7 @@ using Entities.DataTransferObjects;
 using Entities.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Server.ActionFilters;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -49,6 +50,7 @@ namespace Server.Controllers
         }
 
         [HttpPost]
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> CreateEventAsync([FromBody] EventToCreateDto eventDto)
         {
             var _event=_mapper.Map<Event>(eventDto);
@@ -56,6 +58,21 @@ namespace Server.Controllers
             await _repository.SaveAsync();
             return StatusCode(201);
         }
+
+        [HttpPut("{Id}")]
+        public async Task<IActionResult> UpdateEventAsync([FromRoute] Guid Id,[FromBody] EventToUpdateDto eventDto)
+        {
+            var _event = await _repository.Event.GetEventByIdAsync(Id, true);
+            if (_event==null)
+            {
+                _logger.LogInfo($"Event with id: {Id} doesn't exist in the database.");
+                return NotFound();
+            }
+            _mapper.Map(eventDto, _event);
+            await _repository.SaveAsync();
+            return NoContent();
+        }
+
 
 
     }

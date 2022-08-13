@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entities.DataTransferObjects
 {
-    public class EventToShowDto
+    public class EventToShowDto 
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

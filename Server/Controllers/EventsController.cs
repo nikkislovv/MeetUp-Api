@@ -48,5 +48,15 @@ namespace Server.Controllers
             return Ok(eventDto);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> CreateEventAsync([FromBody] EventToCreateDto eventDto)
+        {
+            var _event=_mapper.Map<Event>(eventDto);
+            _repository.Event.CreateEvent(_event);
+            await _repository.SaveAsync();
+            return StatusCode(201);
+        }
+
+
     }
 }

@@ -8,7 +8,8 @@ namespace Server.MapperProfiles
     {
         public EventProfile()
         {
-            CreateMap<Event, EventToShowDto>();               
+            CreateMap<Event, EventToShowDto>();
+            CreateMap<EventToCreateDto, Event>();
         }
     }
 }

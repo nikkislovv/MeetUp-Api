@@ -1,4 +1,5 @@
 ﻿using Entities.Models;
+using Entities.RequestFeatures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace Contracts
         void CreateEvent(Event eventToCreate);
         void DeleteEvent(Event eventToDelete);
         void UpdateEvent(Event eventToUpdate);
-        Task<IEnumerable<Event>> GetAllEventsAsync(bool trackChanges);
+        Task<PagedList<Event>> GetAllEventsAsync(EventParameters eventParameters,bool trackChanges);
         Task<Event> GetEventByIdAsync(Guid Id, bool trackChanges);
     }
 }

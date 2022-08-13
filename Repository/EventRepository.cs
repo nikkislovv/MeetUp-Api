@@ -1,6 +1,7 @@
 ﻿using Contracts;
 using Entities;
 using Entities.Models;
+using Entities.RequestFeatures;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -27,9 +28,15 @@ namespace Repository
         {
             Update(eventToUpdate);
         }
-        public async Task<IEnumerable<Event>> GetAllEventsAsync(bool trackChanges)
+        public async Task<PagedList<Event>> GetAllEventsAsync(EventParameters eventParameters,bool trackChanges)
         {
-            return await FindAll(trackChanges).ToListAsync();
+            var events = await FindAll(trackChanges)
+                .OrderBy(e => e.Time)//sorting
+                .Skip((eventParameters.PageNumber - 1) * eventParameters.PageSize)//paging
+                .Take(eventParameters.PageSize)
+                .ToListAsync();
+            var count = await FindAll(false).CountAsync();
+            return new PagedList<Event>(events, count, eventParameters.PageNumber, eventParameters.PageSize);
         }
         public async Task<Event> GetEventByIdAsync(Guid Id, bool trackChanges)
         {

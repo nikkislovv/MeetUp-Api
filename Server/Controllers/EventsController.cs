@@ -2,8 +2,10 @@
 using Contracts;
 using Entities.DataTransferObjects;
 using Entities.Models;
+using Entities.RequestFeatures;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Server.ActionFilters;
 using System;
 using System.Collections;
@@ -29,9 +31,10 @@ namespace Server.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllEventsAsync()
+        public async Task<IActionResult> GetAllEventsAsync([FromQuery] EventParameters eventParameters)
         {
-            var events = await _repository.Event.GetAllEventsAsync(false);
+            var events = await _repository.Event.GetAllEventsAsync(eventParameters,false);
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(events.MetaData));
             var eventsDto = _mapper.Map<IEnumerable<EventToShowDto>>(events);
             return Ok(eventsDto);
         }
@@ -60,6 +63,7 @@ namespace Server.Controllers
         }
 
         [HttpPut("{Id}")]
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> UpdateEventAsync([FromRoute] Guid Id,[FromBody] EventToUpdateDto eventDto)
         {
             var _event = await _repository.Event.GetEventByIdAsync(Id, true);
@@ -86,8 +90,5 @@ namespace Server.Controllers
             await _repository.SaveAsync();
             return NoContent();
         }
-
-
-
     }
 }

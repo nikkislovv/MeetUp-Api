@@ -23,7 +23,7 @@ namespace Server
     {
         public Startup(IConfiguration configuration)
         {
-            LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(),"/nlog.config"));
+            LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
 
             Configuration = configuration;
         }
@@ -41,7 +41,7 @@ namespace Server
             services.AddScoped<ValidationFilterAttribute>();
 
             services.AddControllers();
-       
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

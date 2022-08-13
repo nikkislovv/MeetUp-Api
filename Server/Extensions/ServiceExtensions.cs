@@ -23,16 +23,16 @@ namespace Server.Extensions
             services.AddScoped<ILoggerManager, LoggerManager>();
         }
 
-        public static void ConfigureSqlContext(this IServiceCollection services,IConfiguration configuration)
+        public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration)
         {
-             services.AddDbContext<RepositoryContext>(opts =>
-             opts.UseSqlServer(configuration.GetConnectionString("sqlConnection"), b =>
-                b.MigrationsAssembly("Server")));
+            services.AddDbContext<RepositoryContext>(opts =>
+            opts.UseSqlServer(configuration.GetConnectionString("sqlConnection"), b =>
+               b.MigrationsAssembly("Server")));
         }
 
         public static void ConfigureRepositoryManager(this IServiceCollection services)
         {
-             services.AddScoped<IRepositoryManager, RepositoryManager>();
+            services.AddScoped<IRepositoryManager, RepositoryManager>();
         }
     }
 

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Server.Controllers
@@ -19,7 +20,7 @@ namespace Server.Controllers
         private readonly ILoggerManager _logger;
         private readonly IMapper _mapper;
 
-        public EventsController(IRepositoryManager repository, ILoggerManager logger,IMapper mapper)
+        public EventsController(IRepositoryManager repository, ILoggerManager logger, IMapper mapper)
         {
             _repository = repository;
             _logger = logger;
@@ -34,6 +35,18 @@ namespace Server.Controllers
             return Ok(eventsDto);
         }
 
+        [HttpGet("{Id}")]
+        public async Task<IActionResult> GetEventByIdAsync([FromRoute] Guid id)
+        {
+            var _event = await _repository.Event.GetEventByIdAsync(id, false);
+            if (_event == null)
+            {
+                _logger.LogInfo($"Event with id: {id} doesn't exist in the database.");
+                return NotFound();
+            }
+            var eventDto = _mapper.Map<EventToShowDto>(_event);
+            return Ok(eventDto);
+        }
 
     }
 }

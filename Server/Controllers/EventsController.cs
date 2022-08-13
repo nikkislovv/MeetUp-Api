@@ -31,8 +31,10 @@ namespace Server.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllEventsAsync([FromQuery] EventParameters eventParameters)
+        public async Task<IActionResult> GetAllEventsAsync([FromQuery] EventParameters eventParameters)       
         {
+            if (!eventParameters.ValidDateRange)
+                return BadRequest("Max Date can't be less than min Date.");
             var events = await _repository.Event.GetAllEventsAsync(eventParameters,false);
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(events.MetaData));
             var eventsDto = _mapper.Map<IEnumerable<EventToShowDto>>(events);

@@ -43,6 +43,9 @@ namespace Server
             {
                 options.SuppressModelStateInvalidFilter = true;
             });
+            services.AddAuthentication();
+            services.ConfigureIdentity();
+
             services.AddControllers();
 
         }
@@ -63,6 +66,8 @@ namespace Server
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

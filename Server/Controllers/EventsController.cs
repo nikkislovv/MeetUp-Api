@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Contracts;
-using Entities.DataTransferObjects;
+using Entities.DataTransferObjects.EventDTO;
 using Entities.Models;
 using Entities.RequestFeatures;
 using Microsoft.AspNetCore.Http;

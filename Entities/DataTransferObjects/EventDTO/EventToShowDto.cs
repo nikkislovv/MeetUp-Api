@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.DataTransferObjects
+namespace Entities.DataTransferObjects.EventDTO
 {
-    public class EventToShowDto 
+    public class EventToShowDto
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

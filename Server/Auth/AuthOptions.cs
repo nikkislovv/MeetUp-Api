@@ -7,7 +7,7 @@ namespace Server.Auth
     {
         public const string ISSUER = "Server";
         public const string AUDIENCE = "Client";
-        const string KEY = "secretKey";  
+        const string KEY = "secretKey12345678910";  
         public const int LIFETIME = 60; 
         public static SymmetricSecurityKey GetSymmetricSecurityKey()
         {

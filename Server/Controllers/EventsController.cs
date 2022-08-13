@@ -3,6 +3,7 @@ using Contracts;
 using Entities.DataTransferObjects.EventDTO;
 using Entities.Models;
 using Entities.RequestFeatures;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -17,6 +18,7 @@ namespace Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class EventsController : ControllerBase
     {
         private readonly IRepositoryManager _repository;
@@ -55,6 +57,7 @@ namespace Server.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> CreateEventAsync([FromBody] EventToCreateDto eventDto)
         {
@@ -65,6 +68,7 @@ namespace Server.Controllers
         }
 
         [HttpPut("{Id}")]
+        [Authorize(Roles = "admin")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> UpdateEventAsync([FromRoute] Guid Id,[FromBody] EventToUpdateDto eventDto)
         {
@@ -80,6 +84,7 @@ namespace Server.Controllers
         }
 
         [HttpDelete("{Id}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteEventAsync([FromRoute] Guid Id)
         {
             var _event = await _repository.Event.GetEventByIdAsync(Id, false);

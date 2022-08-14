@@ -1,0 +1,239 @@
+{
+	"info": {
+		"_postman_id": "39873acb-8cd3-43d4-848e-a5e82b88b5a1",
+		"name": "MeetUp Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21649415"
+	},
+	"item": [
+		{
+			"name": "AccountController",
+			"item": [
+				{
+					"name": "Registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"UserName\":\"Nick74\",\r\n    \"FullName\":\"Kislov Nikita Andreevich\",\r\n    \"Password\":\"jh000000455\",\r\n    \"Email\":\"wjenwenwen22nv8@gmail.com\",\r\n    \"PhoneNumber\":\"+384013333074\",\r\n    \"Roles\":[\"admin\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/Account/Register",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Account",
+								"Register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Auth",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"UserName\":\"Nick74\",\r\n    \"Password\":\"jh000000455\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/Account/SignIn",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Account",
+								"SignIn"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "EventsController",
+			"item": [
+				{
+					"name": "GetAllEvents",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiTmljazc0IiwiSWQiOiIzOGJiZTMzZC04NWU4LTQ1YmYtYTkxNy0wNjA1NjlhMTBkNWMiLCJGdWxsTmFtZSI6Iktpc2xvdiBOaWtpdGEgQW5kcmVldmljaCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6ImFkbWluIiwibmJmIjoxNjYwNDE3NzgzLCJleHAiOjE2NjA0MjEzODMsImlzcyI6IlNlcnZlciIsImF1ZCI6IkNsaWVudCJ9.v7-KKcJR7NyeIvnVtblsa-hFlN5zI9t3s15VPZDZG5o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/Events?pageNumber=1&pageSize=2&minTime=2022-09-04T17:15:00&maxTime=2022-09-24T17:15:00",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Events"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "2"
+								},
+								{
+									"key": "minTime",
+									"value": "2022-09-04T17:15:00"
+								},
+								{
+									"key": "maxTime",
+									"value": "2022-09-24T17:15:00"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetEventById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiTmljazc0IiwiSWQiOiIzOGJiZTMzZC04NWU4LTQ1YmYtYTkxNy0wNjA1NjlhMTBkNWMiLCJGdWxsTmFtZSI6Iktpc2xvdiBOaWtpdGEgQW5kcmVldmljaCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6ImFkbWluIiwibmJmIjoxNjYwNDk0MDkzLCJleHAiOjE2NjA0OTc2OTMsImlzcyI6IlNlcnZlciIsImF1ZCI6IkNsaWVudCJ9.cpqVkMTbX5BUCRdll_m7uLfZZ8Q6EH12xZ8P2ql3o7A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/Events/fb5de669-3f89-402c-57b9-08da7e015486",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Events",
+								"fb5de669-3f89-402c-57b9-08da7e015486"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateEvent",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Disco\",\r\n    \"description\": \"Old music disco\",\r\n    \"organizer\": \"Kirill Aminin\",\r\n    \"time\": \"2022-08-10T17:15:00\",\r\n    \"place\": \"R.Ovalovo 74\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/Events",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateEvent",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Disco\",\r\n    \"description\": \"Old music disco\",\r\n    \"organizer\": \"Kirill Aminin\",\r\n    \"time\": \"2022-09-10T17:15:00\",\r\n    \"place\": \"R.Ovalovo 75\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/Events/fee2da5c-5d6c-4e0b-4196-08da7d264e74",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Events",
+								"fee2da5c-5d6c-4e0b-4196-08da7d264e74"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteEvent",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/api/Events/fee2da5c-5d6c-4e0b-4196-08da7d264e74",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"Events",
+								"fee2da5c-5d6c-4e0b-4196-08da7d264e74"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

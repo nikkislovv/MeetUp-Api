@@ -19,9 +19,9 @@ namespace Entities
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
+            modelBuilder.ApplyConfiguration(new EventConfiguration());
         }
 
-        public DbSet<Event> Companies { get; set; }
+        public DbSet<Event> Events { get; set; }
     }
 }

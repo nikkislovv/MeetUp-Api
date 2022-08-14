@@ -48,6 +48,7 @@ namespace Server
             services.AddAuthentication();
             services.ConfigureIdentity();
             services.ConfigureJWT();
+            services.ConfigureSwagger();
             services.AddControllers();
 
         }
@@ -63,6 +64,12 @@ namespace Server
             {
                 app.UseHsts();
             }
+            app.UseSwagger();
+            app.UseSwaggerUI(s =>
+            {
+                s.SwaggerEndpoint("/swagger/v1/swagger.json", "MeetUp Api");
+
+            });
 
             app.ConfigureExceptionHandler(logger);
             app.UseHttpsRedirection();

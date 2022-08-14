@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Configuration
 {
-    public class EmployeeConfiguration : IEntityTypeConfiguration<Event>
+    public class EventConfiguration : IEntityTypeConfiguration<Event>
     {
         public void Configure(EntityTypeBuilder<Event> builder)
         {
